@@ -1,0 +1,128 @@
+################Run and Output Related
+achInFile 	= M1copy_10000.00000 #input tipsy file
+achOutName     	= GLX     #output file names base
+bStandard       = 1       #Output as tipsy [1]
+bOverwrite      = 0       #Checkpoint overwrite on/off (raw restart)
+iCheckInterval  = 1       #Steps between checkpoints
+iOutInterval    = 1       #Steps between snapshots
+iLogInterval    = 1       #Steps between logfile update
+bParaRead       = 0       #Parallel file reading
+bParaWrite      = 0       #Parallel file writing
+dExtraStore     = 250 #100 #50 #10 #2.5     #Extra storage fraction for partciles
+bDoGravity      = 1       #Gravity on/off (self and/or analytic)
+bDoSelfGravity  = 1       #Self gravity on/off
+bRestart        = 1      #Start from checkpoint
+
+################What Arrays to Write
+iBinaryOutput     = 0    #output format
+bDoIOrderOutput   = 1    #writes iord file
+bDoDensity        = 0    #writes a density file
+bDoPressureOutput = 0    #writes a pressure file
+
+################Timesteps
+nSteps          = 1500      #Time limit.
+iMaxRung        = 20       #Max step rung [min timestep=0.5^iMaxRung]
+dEta            = 0.185    #Time-step [accel]
+dEtaCourant     = 0.4      #Time-step [Courant]
+dDelta 		= 2.12113e-06   #Time-step, makes a dump 1Myr (for um=1Mo)
+
+################Tree Options
+dTheta          = 0.7      #Tree opening criteria
+dSoft           = 5e-2     #Grav softening length ##
+
+################Performance Options
+nTruncateRung 	    = 32
+dFracNoDomainDecomp = 0.1
+
+################Gas Options
+dMsolUnit       = 1         #m-unit
+dKpcUnit        = 1         #d-unit
+dConstGamma     = 1.666667  #EoS gamma
+dMeanMolWeight  = 0.59259   #gas mmw (or 1.27, overridden for cooling)
+nSmooth         = 200        #SPH nearest neighbours
+iGasModel       = 2         #0 adiab, 1 isothermal, 2 cooling     ######
+dConstAlpha     = 2         #AV co-ef (beta=2alpha)
+dResolveJeans   = 3
+dThermalDiffusionCoeff = 0.03 
+
+################SPH and Ewald
+bGeometric        = 0       #Method of calc grad(P)/rho
+bKDK              = 1       #Integrator type
+bCannonical       = 1       #Canonical momentum
+bVDetails         = 1       #Print details 
+bViscosityLimiter = 1       #Spatial limiter
+bViscosityLimitdt = 1       #Balsara switch
+bFastGas          = 1       #Smooth active and neighbours
+dhMinOverSoft 	  = 0.5 
+nReplicas         = 0       
+
+################Potentials
+#bLogHalo        = 0     #on/off #this is pretend stars and DM -turn on for gasONLYdisks
+#dLogHaloVcirc   = 216.  #km/s velocity of RC
+#dLogHaloEps     = 1.0   #radial scale [kpc]
+#dLogHaloFlat    = 0.7   #Vertical scale [fractional]
+#bMWrc           = 0       #Milky Way RC [on/off]
+#dBulgeM         = 1.4e10  #Plummer bulge mass [Mo]
+#dDiskM          = 8.5e10  #MiyamotoNagai disk mass [Mo]
+#dHaloM          = 10.7e10 #AllenSantillan halo mass [Mo]
+#dBulgeR         = 0.4   #Plummer bulge scale length [kpc]
+#dDiskR          = 5.32  #MiyamotoNagai disk scale length [kpc]
+#dDiskZ          = 0.25  #MiyamotoNagai disk scale height [kpc]
+#dHaloR          = 12.   #AllenSantillan halo scale length [kpc]
+#bGalSpiral      = 0     #on/off              ##
+#dSpiralN        = 2     #arm number
+#dSpiralStr      = 1.    #relative arm strength
+#dSpiralPS       = 20.   #pattern speed [km/s/kpc]
+#dSpiralPA       = 15.   #pitch angle [deg]
+#dSpiralSoft     = 0.    #spiral softening timescale
+#bGalBar         = 0     #on/off            ##
+#dBarR           = 1.4   #scale length [kpc]
+#dBarStr         = 2.0   #relative bar strength
+#dBarPS          = 60.   #pattern speed [km/s/kpc]
+#dBarSoft        = 0.    #bar softening timescale
+
+###############Heating/cooling
+CoolInFile              = cooltable_xdr_lowt
+bMetal                  = 1       #on/off
+dMetalDiffusionCoeff    = 0.03    #coef for metal diffusion
+dMetalCoolFactor        = 0.6     #fractional drop in metal cooling
+dCoolingTmin            = 10.     #min temp [K]
+bUV                     = 1       #UV heating on/off
+dzTimeClampUV           = 15.099  #make the background UV heating very weak, equivalent to the z=15.099 value (James says 16)
+dPhotoelectricHeating   = 2e-26   #strength of PE at Ro [8.5kpc]
+dPhotoelectricnMin      = 1e-2    #use heating only when gas is above this density
+dPhotoelectricScaleLength = 1e9    #exp scale of FUV field [kpc],make huge to shut off
+dPhotoelectricInnerRadius = 4.   #point the above becomes constant
+
+################SF Parameters
+bStarForm       = 1        #on/off
+dCStar          = 0.1      #star form. efficiency [%]  ###
+dStarEff        = 1        #fraction of gas converted to stars
+dSoftMin        = 1        #Jeans length as fraction of softening for SF
+dOverDenMin     = 2        #minimum overdensity for forming stars
+dPhysDenMin     = 100      #density ratio for forming stars (atoms/cc)  ######10 for ~10k-100k particls, 100 for n>
+dTempMax        = 300      #max temp for star formation [1e4-1e2K]
+
+dInitGasMass    = 1301759     #in code units, needed for splitting ########################(mass unit usually 1e10Mo)
+dMinGasMass     = 260351     #min gas mas [code unit]    0.2*above
+dInitStarMass   = 50000000   #mass of stars [code unit, 0-big]
+
+dMaxStarMass    = 0        #max mass of stars
+dMinMassFrac    = 0.1      #gas mass fraction limit for deletion
+dDeltaStarForm  = 1e5      #min SF timestep [yrs]
+bFormOutputs    = 1        #additional files
+
+################SN Feedback parameters
+bFeedBack       = 1         #[on/off]
+iRandomSeed     = 1         #Seed for SN
+dESN            = 0.1e+51   #SF energy [erg, 1e50-1e51] #
+#dMultiPhaseMaxTime = 1e8
+
+####################Cooling deactivation
+#dNoncoolConvTime = 5e6  #Timescale to convert cooling to non-cooling [yr]
+dHotConvTime      = 5e6 #as above
+dZAMSDelayTime    = 0. #no delay between star formation and feedback
+
+################Cosmology
+bComove         = 0         #[on/off]
+bPeriodic       = 0         #[on/off]
